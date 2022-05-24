@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     int []performance={-1,-1,-1,-1,-1,-1}; //score of a game is updated in this array
     int []score={-1,-1,-1}; //score of each match is updated in this array. A total of three matches in a game
     String operators[]={"+","-","*","/"};
-    int correctButton=0; //which button will have the correct answer (tag of that button)
+    int correctButton = 0; //which button will have the correct answer (tag of that button)
     Random random=new Random(); //You will generate randdom alegebra questions
     TextView textView2;
     Button button1,button2,button3,button4;
@@ -72,9 +72,52 @@ public class MainActivity extends AppCompatActivity {
     public void newMatch() {  //A game is composed of three matches
 
         int operand1 = random.nextInt(10);
-        int operand2=0;
-        //check is operand2 is not zero; otherwise in case of division-divide by zero error will come
+        int operand2= random.nextInt(10);
+        int correctans = -100;
+        int correctButton = random.nextInt(4);
         String operator = operators[random.nextInt(4)];
+        if (operator.equals("+"))
+            correctans= operand1+operand2;
+        else if(operator.equals("-"))
+            correctans= operand1-operand2;
+        else if (operator.equals("*"))
+            correctans= operand1*operand2;
+        else if(operator.equals("/"))
+            correctans= operand1/operand2;
+
+        if(correctButton==0)
+        {
+            button1.setText(correctans+"");
+            button2.setText(correctans+1+"");
+            button3.setText(correctans+2+"");
+            button4.setText(correctans-2+"");
+        }
+
+        if(correctButton==1)
+        {
+            button1.setText(correctans+1+"");
+            button2.setText(correctans+"");
+            button3.setText(correctans+2+"");
+            button4.setText(correctans-2+"");
+        }
+
+        if(correctButton==2)
+        {
+            button1.setText(correctans+2+"");
+            button2.setText(correctans+1+"");
+            button3.setText(correctans+"");
+            button4.setText(correctans-2+"");
+        }
+
+        if(correctButton==3)
+        {
+            button1.setText(correctans-2+"");
+            button2.setText(correctans+1+"");
+            button3.setText(correctans+2+"");
+            button4.setText(correctans+"");
+        }
+        //check is operand2 is not zero; otherwise in case of division-divide by zero error will come
+
         textView2.setText(operand1 + operator + operand2);
 
       // Your code here, to diplay correct and incorrect options on the buttons
